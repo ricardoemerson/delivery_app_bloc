@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'core/providers/application_providers.dart';
 import 'core/theme/app_theme.dart';
+import 'pages/home/home_router.dart';
 import 'pages/splash/splash_page.dart';
 
 class AppWidget extends StatelessWidget {
@@ -8,13 +10,16 @@ class AppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Delivery App',
-      theme: AppTheme.theme,
-      routes: {
-        '/': (context) => const SplashPage(),
-      },
+    return ApplicationProviders(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Delivery App',
+        theme: AppTheme.theme,
+        routes: {
+          '/': (context) => const SplashPage(),
+          '/home': (context) => HomeRouter.page,
+        },
+      ),
     );
   }
 }
