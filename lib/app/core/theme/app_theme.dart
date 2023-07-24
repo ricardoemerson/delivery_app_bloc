@@ -12,11 +12,11 @@ class AppTheme {
 
   static final theme = ThemeData(
     scaffoldBackgroundColor: Colors.grey[50],
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.white,
+    appBarTheme: AppBarTheme(
+      backgroundColor: Colors.grey[50],
       elevation: 0,
       centerTitle: true,
-      iconTheme: IconThemeData(color: Colors.black),
+      iconTheme: const IconThemeData(color: Colors.black),
     ),
     colorScheme: ColorScheme.fromSeed(
       seedColor: AppColors.instance.primary,
