@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 class Button extends StatelessWidget {
   final String label;
   final double width;
-  final double height;
+  final double? height;
   final VoidCallback? onPressed;
 
   const Button({
     Key? key,
     required this.label,
     required this.width,
-    required this.height,
+    this.height = 45,
     this.onPressed,
   }) : super(key: key);
 
