@@ -1,56 +1,30 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 mixin MessageMixin<T extends StatefulWidget> on State<T> {
   void showInfo(String message) {
     _showSnackbar(
-      AwesomeSnackbarContent(
-        title: 'Atenção',
-        message: message,
-        contentType: ContentType.help,
-      ),
+      CustomSnackBar.info(message: message),
     );
   }
 
   void showSuccess(String message) {
     _showSnackbar(
-      AwesomeSnackbarContent(
-        title: 'Sucesso',
-        message: message,
-        contentType: ContentType.success,
-      ),
-    );
-  }
-
-  void showWarning(String message) {
-    _showSnackbar(
-      AwesomeSnackbarContent(
-        title: 'Atenção',
-        message: message,
-        contentType: ContentType.warning,
-      ),
+      CustomSnackBar.success(message: message),
     );
   }
 
   void showError(String message) {
     _showSnackbar(
-      AwesomeSnackbarContent(
-        title: 'Erro',
-        message: message,
-        contentType: ContentType.failure,
-      ),
+      CustomSnackBar.error(message: message),
     );
   }
 
-  void _showSnackbar(AwesomeSnackbarContent content) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        elevation: 0,
-        behavior: SnackBarBehavior.floating,
-        padding: const EdgeInsets.only(top: 72),
-        backgroundColor: Colors.transparent,
-        content: content,
-      ),
+  void _showSnackbar(CustomSnackBar snackBar) {
+    showTopSnackBar(
+      Overlay.of(context),
+      snackBar,
     );
   }
 }
