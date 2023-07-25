@@ -7,54 +7,65 @@ class ProductTile extends StatelessWidget {
   final ProductModel product;
 
   const ProductTile({
-    Key? key,
+    super.key,
     required this.product,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  product.name,
-                  style: context.textStyles.textExtraBold.copyWith(fontSize: 16),
-                ),
-                Text(
-                  product.description,
-                  style: context.textStyles.textRegular.copyWith(fontSize: 12),
-                ),
-                Text(
-                  product.price.toCurrencyPtBr,
-                  style: context.textStyles.textMedium.copyWith(
-                    fontSize: 14,
-                    color: context.colors.secondary,
+    return InkWell(
+      onTap: () async {
+        await Navigator.pushNamed(
+          context,
+          '/products/detail',
+          arguments: {
+            'product': product,
+          },
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    product.name,
+                    style: context.textStyles.textExtraBold.copyWith(fontSize: 16),
                   ),
-                ),
-              ],
+                  Text(
+                    product.description,
+                    style: context.textStyles.textRegular.copyWith(fontSize: 12),
+                  ),
+                  Text(
+                    product.price.toCurrencyPtBr,
+                    style: context.textStyles.textMedium.copyWith(
+                      fontSize: 14,
+                      color: context.colors.secondary,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: FadeInImage.assetNetwork(
-              placeholder: 'assets/images/loading.gif',
-              image: product.image,
-              imageErrorBuilder: (context, error, stackTrace) => Image.asset(
-                'assets/images/image-error.png',
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: FadeInImage.assetNetwork(
+                placeholder: 'assets/images/loading.gif',
+                image: product.image,
+                imageErrorBuilder: (context, error, stackTrace) => Image.asset(
+                  'assets/images/image-error.png',
+                  width: 100,
+                  height: 100,
+                ),
                 width: 100,
                 height: 100,
+                fit: BoxFit.cover,
               ),
-              width: 100,
-              height: 100,
-              fit: BoxFit.cover,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

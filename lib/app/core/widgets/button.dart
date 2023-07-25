@@ -7,12 +7,12 @@ class Button extends StatelessWidget {
   final VoidCallback? onPressed;
 
   const Button({
-    Key? key,
+    super.key,
     required this.label,
     required this.width,
     this.height = 45,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
