@@ -44,6 +44,11 @@ class ProductTile extends StatelessWidget {
             child: FadeInImage.assetNetwork(
               placeholder: 'assets/images/loading.gif',
               image: product.image,
+              imageErrorBuilder: (context, error, stackTrace) => Image.asset(
+                'assets/images/image-error.png',
+                width: 100,
+                height: 100,
+              ),
               width: 100,
               height: 100,
               fit: BoxFit.cover,

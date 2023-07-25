@@ -1,0 +1,7 @@
+targets:
+  $default:
+    builders:
+      bloc|freezed:
+        generate_for:
+          - "lib/app/pages/**_bloc.dart"
+          - "lib/app/pages/**_cubit.dart"

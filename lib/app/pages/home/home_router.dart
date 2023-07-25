@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 import '../../data/repositories/product/i_product_repository.dart';
 import '../../data/repositories/product/product_repository.dart';
+import 'cubit/home_cubit.dart';
 import 'home_page.dart';
 
 class HomeRouter {
   HomeRouter._();
 
-  static Widget get page => MultiRepositoryProvider(
+  static Widget get page => MultiProvider(
         providers: [
-          RepositoryProvider<IProductRepository>(
+          Provider<IProductRepository>(
             create: (context) => ProductRepository(restClient: context.read()),
-          )
+          ),
+          Provider(
+            create: (context) => HomeCubit(productRepository: context.read()),
+          ),
         ],
         child: const HomePage(),
       );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 import '../rest_client/rest_client.dart';
 
@@ -13,9 +13,9 @@ class ApplicationProviders extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiRepositoryProvider(
+    return MultiProvider(
       providers: [
-        RepositoryProvider(create: (context) => RestClient()),
+        Provider(create: (context) => RestClient()),
       ],
       child: child,
     );
