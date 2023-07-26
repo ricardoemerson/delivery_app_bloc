@@ -10,4 +10,7 @@ class ProductOrderDto {
   });
 
   double get totalPrice => amount * product.price;
+
+  @override
+  String toString() => 'ProductOrderDto(product: $product, amount: $amount)';
 }

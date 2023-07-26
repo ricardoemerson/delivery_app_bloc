@@ -1,0 +1,6 @@
+{
+  "bloc.newBlocTemplate.type": "equatable",
+  "bloc.newCubitTemplate.type": "equatable",
+  "bloc.newCubitTemplate.createDirectory": false,
+  "bloc.newBlocTemplate.createDirectory": false
+}

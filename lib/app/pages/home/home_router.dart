@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../data/repositories/product/i_product_repository.dart';
 import '../../data/repositories/product/product_repository.dart';
-import 'cubit/home_cubit.dart';
+import 'home_cubit.dart';
 import 'home_page.dart';
 
 class HomeRouter {

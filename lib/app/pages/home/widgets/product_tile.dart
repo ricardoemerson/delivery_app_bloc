@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/extensions/extensions.dart';
+import '../../../data/dto/product_order_dto.dart';
 import '../../../data/models/product_model.dart';
+import '../home_cubit.dart';
 
 class ProductTile extends StatelessWidget {
   final ProductModel product;
@@ -15,13 +18,19 @@ class ProductTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        await Navigator.pushNamed(
+        final cubit = context.read<HomeCubit>();
+
+        final productOrder = await Navigator.pushNamed(
           context,
           '/products/detail',
           arguments: {
             'product': product,
           },
         );
+
+        if (productOrder != null) {
+          cubit.addOrUpdateBag(productOrder as ProductOrderDto);
+        }
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),

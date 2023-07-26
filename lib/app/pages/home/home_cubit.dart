@@ -1,14 +1,11 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../core/exceptions/repository_exception.dart';
-import '../../../data/models/product_model.dart';
-import '../../../data/repositories/product/i_product_repository.dart';
-
-part 'home_cubit.freezed.dart';
-part 'home_state.dart';
+import '../../core/exceptions/repository_exception.dart';
+import '../../data/dto/product_order_dto.dart';
+import '../../data/repositories/product/i_product_repository.dart';
+import 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final IProductRepository _productRepository;
@@ -20,21 +17,28 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> loadProducts() async {
     try {
-      emit(const HomeState.loading());
+      emit(state.copyWith(status: HomeStateStatus.loading));
 
       await Future.delayed(const Duration(seconds: 1));
 
       final products = await _productRepository.findAll();
 
-      emit(HomeState.loaded(products: products));
+      emit(state.copyWith(status: HomeStateStatus.loaded, products: products));
     } on RepositoryException catch (err, s) {
       log('${err.message}', error: err, stackTrace: s);
 
-      emit(HomeState.error(message: err.message ?? 'Erro ao buscar produtos.'));
+      emit(state.copyWith(errorMessage: err.message));
     } on Exception catch (err, s) {
       log('Erro ao buscar produtos.', error: err, stackTrace: s);
 
-      emit(const HomeState.error(message: 'Erro ao buscar produtos.'));
+      emit(state.copyWith(errorMessage: 'Erro ao buscar produtos.'));
     }
+  }
+
+  void addOrUpdateBag(ProductOrderDto productOrder) {
+    final shoppingBag = [...state.shoppingBag];
+    shoppingBag.add(productOrder);
+
+    emit(state.copyWith(shoppingBag: shoppingBag));
   }
 }

@@ -209,6 +209,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.3.0"
+  equatable:
+    dependency: "direct main"
+    description:
+      name: equatable
+      sha256: c2b87cb7756efdf69892005af546c56c0b5037f54d2a88269b4f347a505e3ca2
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.5"
   fake_async:
     dependency: transitive
     description:
@@ -267,22 +275,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  freezed:
-    dependency: "direct dev"
-    description:
-      name: freezed
-      sha256: "2df89855fe181baae3b6d714dc3c4317acf4fccd495a6f36e5e00f24144c6c3b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.4.1"
-  freezed_annotation:
-    dependency: "direct main"
-    description:
-      name: freezed_annotation
-      sha256: c3fd9336eb55a38cc1bbd79ab17573113a8deccd0ecbbf926cca3c62803b5c2d
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.4.1"
   frontend_server_client:
     dependency: transitive
     description:
@@ -379,6 +371,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  match:
+    dependency: "direct main"
+    description:
+      name: match
+      sha256: "04c05fb9f40204b5876b89c4c541838894ebc76cde6de63f0b6b77c0eaf21789"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.1"
+  match_generator:
+    dependency: "direct dev"
+    description:
+      name: match_generator
+      sha256: a7437803ac00ecb16ca437ff9b70260253aecb9b3146e38d71fb74f44d8c2e4e
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.2"
   matcher:
     dependency: transitive
     description:

@@ -6,8 +6,9 @@ import '../../core/base_state/base_state.dart';
 import '../../core/extensions/extensions.dart';
 import '../../core/widgets/app_bar_logo.dart';
 import '../../core/widgets/increment_decrement_button.dart';
+import '../../data/dto/product_order_dto.dart';
 import '../../data/models/product_model.dart';
-import 'cubit/product_detail_cubit.dart';
+import 'product_detail_cubit.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final ProductModel product;
@@ -63,13 +64,7 @@ class _ProductDetailPageState extends BaseState<ProductDetailPage, ProductDetail
             ),
           ),
           const Divider(),
-          BlocSelector<ProductDetailCubit, ProductDetailState, int>(
-            selector: (state) {
-              return state.maybeWhen(
-                currentAmount: (amount) => amount,
-                orElse: () => 1,
-              );
-            },
+          BlocBuilder<ProductDetailCubit, int>(
             builder: (context, amount) {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -92,7 +87,9 @@ class _ProductDetailPageState extends BaseState<ProductDetailPage, ProductDetail
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () => Navigator.of(context).pop(
+                          ProductOrderDto(product: widget.product, amount: amount),
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
