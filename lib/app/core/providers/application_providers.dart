@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../data/repositories/auth/auth_repository.dart';
+import '../../data/repositories/auth/i_auth_repository.dart';
 import '../rest_client/rest_client.dart';
 
 class ApplicationProviders extends StatelessWidget {
@@ -16,6 +18,7 @@ class ApplicationProviders extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider(create: (context) => RestClient()),
+        Provider<IAuthRepository>(create: (context) => AuthRepository(restClient: context.read())),
       ],
       child: child,
     );
