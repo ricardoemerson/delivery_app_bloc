@@ -12,8 +12,9 @@ import 'product_detail_cubit.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final ProductModel product;
+  final ProductOrderDto? productOrder;
 
-  const ProductDetailPage({super.key, required this.product});
+  const ProductDetailPage({super.key, required this.product, this.productOrder});
 
   @override
   State<ProductDetailPage> createState() => _ProductDetailPageState();
@@ -21,7 +22,48 @@ class ProductDetailPage extends StatefulWidget {
 
 class _ProductDetailPageState extends BaseState<ProductDetailPage, ProductDetailCubit> {
   @override
-  void onReady() {}
+  void initState() {
+    super.initState();
+
+    final amount = widget.productOrder?.amount ?? 1;
+
+    cubit.initial(amount, widget.productOrder != null);
+  }
+
+  void _navigateBack(BuildContext context, int amount) {
+    Navigator.of(context).pop(
+      ProductOrderDto(product: widget.product, amount: amount),
+    );
+  }
+
+  void _showConfirmDelete(int amount) {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Deseja excluir o produto?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(
+                'Cancelar',
+                style: context.textStyles.textBold.copyWith(color: Colors.red),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+
+                _navigateBack(context, amount);
+              },
+              child: const Text('Confirmar'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,23 +129,34 @@ class _ProductDetailPageState extends BaseState<ProductDetailPage, ProductDetail
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
-                        onPressed: () => Navigator.of(context).pop(
-                          ProductOrderDto(product: widget.product, amount: amount),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text('Adicionar'),
-                            Expanded(
-                              child: AutoSizeText(
-                                (widget.product.price * amount).toCurrencyPtBr,
-                                maxFontSize: 14,
-                                minFontSize: 5,
-                                maxLines: 1,
-                                textAlign: TextAlign.right,
+                        style: amount == 0
+                            ? ElevatedButton.styleFrom(backgroundColor: Colors.red)
+                            : null,
+                        onPressed: () {
+                          if (amount == 0) {
+                            _showConfirmDelete(amount);
+                          } else {
+                            _navigateBack(context, amount);
+                          }
+                        },
+                        child: Visibility(
+                          visible: amount > 0,
+                          replacement: const Text('Excluir item'),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Adicionar'),
+                              Expanded(
+                                child: AutoSizeText(
+                                  (widget.product.price * amount).toCurrencyPtBr,
+                                  maxFontSize: 14,
+                                  minFontSize: 5,
+                                  maxLines: 1,
+                                  textAlign: TextAlign.right,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),

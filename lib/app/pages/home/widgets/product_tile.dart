@@ -8,10 +8,12 @@ import '../home_cubit.dart';
 
 class ProductTile extends StatelessWidget {
   final ProductModel product;
+  final ProductOrderDto? productOrder;
 
   const ProductTile({
     super.key,
     required this.product,
+    this.productOrder,
   });
 
   @override
@@ -20,16 +22,17 @@ class ProductTile extends StatelessWidget {
       onTap: () async {
         final cubit = context.read<HomeCubit>();
 
-        final productOrder = await Navigator.pushNamed(
+        final response = await Navigator.pushNamed(
           context,
           '/products/detail',
           arguments: {
             'product': product,
+            'productOrder': productOrder,
           },
         );
 
-        if (productOrder != null) {
-          cubit.addOrUpdateBag(productOrder as ProductOrderDto);
+        if (response != null) {
+          cubit.addOrUpdateBag(response as ProductOrderDto);
         }
       },
       child: Padding(
