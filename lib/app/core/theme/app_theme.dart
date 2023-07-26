@@ -29,7 +29,7 @@ class AppTheme {
     inputDecorationTheme: InputDecorationTheme(
       fillColor: Colors.white,
       filled: true,
-      isDense: true,
+      // isDense: true,
       contentPadding: const EdgeInsets.only(top: 15, left: 17, right: 17),
       border: defaultInputBorder,
       enabledBorder: defaultInputBorder,

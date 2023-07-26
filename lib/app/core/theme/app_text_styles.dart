@@ -20,6 +20,6 @@ class AppTextStyles {
   TextStyle get textBold => TextStyle(fontWeight: FontWeight.bold, fontFamily: fontFamily);
   TextStyle get textExtraBold => TextStyle(fontWeight: FontWeight.w800, fontFamily: fontFamily);
 
-  TextStyle get textTitle => textExtraBold.copyWith(fontSize: 22);
+  TextStyle get textTitle => textExtraBold.copyWith(fontSize: 28);
   TextStyle get textButtonLabel => textBold.copyWith(fontSize: 14);
 }

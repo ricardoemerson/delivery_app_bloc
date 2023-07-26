@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/extensions/extensions.dart';
 import '../../../data/dto/product_order_dto.dart';
@@ -7,6 +8,15 @@ class ShoppingCart extends StatelessWidget {
   final List<ProductOrderDto> productsOrder;
 
   const ShoppingCart({super.key, required this.productsOrder});
+
+  Future<void> _navigateToOrder(BuildContext context) async {
+    final navigatorContext = Navigator.of(context);
+    final storage = await SharedPreferences.getInstance();
+
+    if (!storage.containsKey('accessToken')) {
+      final response = await navigatorContext.pushNamed('/auth/login');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +40,7 @@ class ShoppingCart extends StatelessWidget {
         ),
       ),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () => _navigateToOrder(context),
         child: Stack(
           children: [
             const Align(
