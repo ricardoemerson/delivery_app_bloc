@@ -35,20 +35,20 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  void addOrUpdateBag(ProductOrderDto productOrder) {
-    final shoppingBag = [...state.shoppingBag];
-    final index = shoppingBag.indexWhere((po) => po.product == productOrder.product);
+  void addOrUpdateCart(ProductOrderDto productOrder) {
+    final shoppingCart = [...state.shoppingCart];
+    final index = shoppingCart.indexWhere((po) => po.product == productOrder.product);
 
     if (index > -1) {
       if (productOrder.amount == 0) {
-        shoppingBag.removeAt(index);
+        shoppingCart.removeAt(index);
       } else {
-        shoppingBag[index] = productOrder;
+        shoppingCart[index] = productOrder;
       }
     } else {
-      shoppingBag.add(productOrder);
+      shoppingCart.add(productOrder);
     }
 
-    emit(state.copyWith(shoppingBag: shoppingBag));
+    emit(state.copyWith(shoppingCart: shoppingCart));
   }
 }

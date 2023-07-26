@@ -32,7 +32,7 @@ class ProductTile extends StatelessWidget {
         );
 
         if (response != null) {
-          cubit.addOrUpdateBag(response as ProductOrderDto);
+          cubit.addOrUpdateCart(response as ProductOrderDto);
         }
       },
       child: Padding(
