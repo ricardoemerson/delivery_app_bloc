@@ -17,13 +17,13 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> loadProducts() async {
     try {
-      emit(state.copyWith(status: HomeStateStatus.loading));
+      emit(state.copyWith(status: HomeStatus.loading));
 
       await Future.delayed(const Duration(seconds: 1));
 
       final products = await _productRepository.findAll();
 
-      emit(state.copyWith(status: HomeStateStatus.loaded, products: products));
+      emit(state.copyWith(status: HomeStatus.loaded, products: products));
     } on RepositoryException catch (err, s) {
       log('${err.message}', error: err, stackTrace: s);
 

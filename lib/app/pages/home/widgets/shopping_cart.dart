@@ -15,7 +15,13 @@ class ShoppingCart extends StatelessWidget {
 
     if (!storage.containsKey('accessToken')) {
       final response = await navigatorContext.pushNamed('/auth/login');
+
+      if (response == null || response == false) {
+        return;
+      }
     }
+
+    final orderResponse = await navigatorContext.pushNamed('/order', arguments: productsOrder);
   }
 
   @override

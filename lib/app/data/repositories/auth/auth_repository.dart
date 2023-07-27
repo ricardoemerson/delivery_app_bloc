@@ -19,7 +19,7 @@ class AuthRepository implements IAuthRepository {
   Future<AuthModel> login(String email, String password) async {
     try {
       final auth = await _restClient.post(
-        'login',
+        '/auth',
         data: {
           'email': email,
           'password': password,

@@ -10,7 +10,7 @@ class LoginRouter {
   static Widget get page => MultiProvider(
         providers: [
           Provider(
-            create: (context) => LoginCubit(),
+            create: (context) => LoginCubit(authRepository: context.read()),
           ),
         ],
         child: const LoginPage(),
