@@ -8,12 +8,21 @@ class IncrementDecrementButton extends StatelessWidget {
   final VoidCallback onIncrement;
   final VoidCallback onDecrement;
 
+  final bool _compact;
+
   const IncrementDecrementButton({
     super.key,
     required this.amount,
     required this.onIncrement,
     required this.onDecrement,
-  });
+  }) : _compact = false;
+
+  const IncrementDecrementButton.compact({
+    super.key,
+    required this.amount,
+    required this.onIncrement,
+    required this.onDecrement,
+  }) : _compact = true;
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +39,13 @@ class IncrementDecrementButton extends StatelessWidget {
             icon: Icon(
               Icons.remove,
               color: context.colors.primary,
+              size: _compact ? 24 : 32,
             ),
           ),
           Text(
             amount.toString(),
             style: context.textStyles.textRegular.copyWith(
-              fontSize: 17,
+              fontSize: _compact ? 18 : 22,
               color: context.colors.secondary,
             ),
           ),
@@ -44,6 +54,7 @@ class IncrementDecrementButton extends StatelessWidget {
             icon: Icon(
               Icons.add,
               color: context.colors.primary,
+              size: _compact ? 24 : 32,
             ),
           ),
         ],
