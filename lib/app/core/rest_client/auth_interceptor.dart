@@ -1,27 +1,28 @@
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthInterceptor extends Interceptor {
-  // final IStorage _storage;
+  @override
+  Future<void> onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+    final storage = await SharedPreferences.getInstance();
 
-  // AuthInterceptor({
-  //   required IStorage storage,
-  // }) : _storage = storage;
+    final accessToken = storage.getString('accessToken');
 
-  // @override
-  // void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-  //   final accessToken = _storage.getData(SessionStorageKeysEnum.accessToken.key);
+    options.headers['Authorization'] = 'Bearer $accessToken';
 
-  //   options.headers['Authorization'] = 'Bearer $accessToken';
+    handler.next(options);
+  }
 
-  //   handler.next(options);
-  // }
+  @override
+  Future<void> onError(DioException err, ErrorInterceptorHandler handler) async {
+    if (err.response?.statusCode == 401) {
+      final storage = await SharedPreferences.getInstance();
+      storage.clear();
 
-  // @override
-  // void onError(DioError err, ErrorInterceptorHandler handler) {
-  //   if (err.response?.statusCode == 401) {
-  //     GlobalContext.instance.expireLogin();
-  //   } else {
-  //     handler.next(err);
-  //   }
-  // }
+      // GlobalContext.instance.expireLogin();
+      handler.next(err);
+    } else {
+      handler.next(err);
+    }
+  }
 }

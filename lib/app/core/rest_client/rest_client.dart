@@ -2,9 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 
 import '../helpers/env_helper.dart';
+import 'auth_interceptor.dart';
 
 class RestClient extends DioForNative {
-  // late AuthInterceptor _authInterceptor;
+  late AuthInterceptor _authInterceptor;
 
   RestClient()
       : super(
@@ -21,19 +22,19 @@ class RestClient extends DioForNative {
       ),
     );
 
-    // _authInterceptor = AuthInterceptor(storage: _storage);
+    _authInterceptor = AuthInterceptor();
   }
 
   RestClient authRequest() {
-    // if (!interceptors.contains(_authInterceptor)) {
-    //   interceptors.add(_authInterceptor);
-    // }
+    if (!interceptors.contains(_authInterceptor)) {
+      interceptors.add(_authInterceptor);
+    }
 
     return this;
   }
 
   RestClient publicRequest() {
-    // interceptors.remove(_authInterceptor);
+    interceptors.remove(_authInterceptor);
 
     return this;
   }
