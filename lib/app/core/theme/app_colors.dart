@@ -13,4 +13,5 @@ class AppColors {
 
   Color get primary => const Color(0xFF017D21);
   Color get secondary => const Color(0xFFF88B0C);
+  Color get greyText => const Color(0xFF767676);
 }

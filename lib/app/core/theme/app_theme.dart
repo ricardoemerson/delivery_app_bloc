@@ -30,6 +30,8 @@ class AppTheme {
       fillColor: Colors.white,
       filled: true,
       // isDense: true,
+      hintStyle: AppTextStyles.instance.textRegular
+          .copyWith(fontSize: 16, color: AppColors.instance.greyText),
       contentPadding: const EdgeInsets.only(top: 15, left: 17, right: 17),
       border: defaultInputBorder,
       enabledBorder: defaultInputBorder,
