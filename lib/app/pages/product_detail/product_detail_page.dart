@@ -96,12 +96,23 @@ class _ProductDetailPageState extends BaseState<ProductDetailPage, ProductDetail
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Text(
-                  widget.product.description,
-                  style: context.textStyles.textRegular,
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    child: Text(
+                      widget.product.description,
+                      style: context.textStyles.textRegular,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    widget.product.price.toCurrencyPtBr,
+                    style: context.textStyles.textMedium
+                        .copyWith(fontSize: 16, color: context.colors.secondary),
+                  ),
+                ],
               ),
             ),
           ),
