@@ -22,7 +22,7 @@ class RestClient extends DioForNative {
       ),
     );
 
-    _authInterceptor = AuthInterceptor();
+    _authInterceptor = AuthInterceptor(restClient: this);
   }
 
   RestClient authRequest() {
