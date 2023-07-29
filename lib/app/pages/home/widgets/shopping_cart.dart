@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/extensions/extensions.dart';
 import '../../../data/dto/product_order_dto.dart';
+import '../home_cubit.dart';
 
 class ShoppingCart extends StatelessWidget {
-  final List<ProductOrderDto> productsOrder;
+  final List<ProductOrderDto> shoppingCart;
 
-  const ShoppingCart({super.key, required this.productsOrder});
+  const ShoppingCart({super.key, required this.shoppingCart});
 
   Future<void> _navigateToOrder(BuildContext context) async {
     final navigatorContext = Navigator.of(context);
+    final cubit = context.read<HomeCubit>();
     final storage = await SharedPreferences.getInstance();
 
     if (!storage.containsKey('accessToken')) {
@@ -21,12 +24,13 @@ class ShoppingCart extends StatelessWidget {
       }
     }
 
-    final orderResponse = await navigatorContext.pushNamed('/order', arguments: productsOrder);
+    final updatedShoppingCart = await navigatorContext.pushNamed('/order', arguments: shoppingCart);
+    cubit.updateShoppingCart(updatedShoppingCart as List<ProductOrderDto>);
   }
 
   @override
   Widget build(BuildContext context) {
-    final totalCart = productsOrder.fold(0.0, (total, element) => total += element.totalPrice);
+    final totalCart = shoppingCart.fold(0.0, (total, element) => total += element.totalPrice);
 
     return Container(
       width: context.screenWidth,

@@ -25,6 +25,7 @@ mixin MessageMixin<T extends StatefulWidget> on State<T> {
     showTopSnackBar(
       Overlay.of(context),
       snackBar,
+      displayDuration: const Duration(seconds: 5),
     );
   }
 }

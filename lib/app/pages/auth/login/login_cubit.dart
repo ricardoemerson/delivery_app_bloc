@@ -38,9 +38,9 @@ class LoginCubit extends Cubit<LoginState> {
     } on RepositoryException catch (err, s) {
       const message = 'Erro ao realizar o login do usuário';
 
-      log(message, error: err, stackTrace: s);
+      log(err.message ?? message, error: err, stackTrace: s);
 
-      emit(state.copyWith(status: LoginStatus.error, errorMessage: message));
+      emit(state.copyWith(status: LoginStatus.error, errorMessage: err.message ?? message));
     }
   }
 }

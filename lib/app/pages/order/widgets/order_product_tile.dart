@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/extensions/extensions.dart';
 import '../../../core/widgets/increment_decrement_button.dart';
 import '../../../data/dto/product_order_dto.dart';
+import '../order_cubit.dart';
 
 class OrderProductTile extends StatelessWidget {
   final int index;
@@ -42,8 +44,12 @@ class OrderProductTile extends StatelessWidget {
                   ),
                   IncrementDecrementButton.compact(
                     amount: productOrder.amount,
-                    onIncrement: () {},
-                    onDecrement: () {},
+                    onIncrement: () {
+                      context.read<OrderCubit>().incrementProduct(index);
+                    },
+                    onDecrement: () {
+                      context.read<OrderCubit>().decrementProduct(index);
+                    },
                   ),
                 ],
               ),

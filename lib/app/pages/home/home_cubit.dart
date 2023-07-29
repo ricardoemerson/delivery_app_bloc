@@ -51,4 +51,8 @@ class HomeCubit extends Cubit<HomeState> {
 
     emit(state.copyWith(shoppingCart: shoppingCart));
   }
+
+  void updateShoppingCart(List<ProductOrderDto> updatedShoppingCart) {
+    emit(state.copyWith(shoppingCart: updatedShoppingCart));
+  }
 }

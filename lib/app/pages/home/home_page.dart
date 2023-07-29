@@ -68,7 +68,7 @@ class _HomePageState extends BaseState<HomePage, HomeCubit> {
               ),
               Visibility(
                 visible: state.shoppingCart.isNotEmpty,
-                child: ShoppingCart(productsOrder: state.shoppingCart),
+                child: ShoppingCart(shoppingCart: state.shoppingCart),
               ),
             ],
           );

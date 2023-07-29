@@ -22,8 +22,7 @@ class ProductTile extends StatelessWidget {
       onTap: () async {
         final cubit = context.read<HomeCubit>();
 
-        final response = await Navigator.pushNamed(
-          context,
+        final response = await Navigator.of(context).pushNamed(
           '/products/detail',
           arguments: {
             'product': product,

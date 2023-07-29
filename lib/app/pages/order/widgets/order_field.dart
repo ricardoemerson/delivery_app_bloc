@@ -33,11 +33,12 @@ class OrderField extends StatelessWidget {
         TextFormField(
           controller: controller,
           decoration: InputDecoration(
+            filled: false,
             hintText: hintText,
             border: defaultBorder,
             enabledBorder: defaultBorder,
             focusedBorder: defaultBorder,
-            contentPadding: EdgeInsets.zero,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 10),
           ),
           validator: validator,
         ),

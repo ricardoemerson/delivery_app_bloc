@@ -113,7 +113,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginCubit> {
                   children: [
                     const Text('Não possui uma conta?'),
                     TextButton(
-                      onPressed: () => Navigator.pushNamed(context, '/auth/register'),
+                      onPressed: () => Navigator.of(context).pushNamed('/auth/register'),
                       child: Text(
                         'Cadastre-se',
                         style: context.textStyles.textBold.copyWith(color: Colors.blue),
