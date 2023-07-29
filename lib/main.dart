@@ -8,5 +8,5 @@ Future<void> main() async {
 
   await EnvHelper.instance.load();
 
-  runApp(const AppWidget());
+  runApp(AppWidget());
 }

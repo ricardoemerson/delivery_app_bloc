@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'core/contexts/global_context.dart';
 import 'core/providers/application_providers.dart';
 import 'core/theme/app_theme.dart';
 import 'pages/auth/login/login_router.dart';
@@ -11,7 +12,11 @@ import 'pages/product_detail/product_detail_router.dart';
 import 'pages/splash/splash_page.dart';
 
 class AppWidget extends StatelessWidget {
-  const AppWidget({super.key});
+  final _navigatorKey = GlobalKey<NavigatorState>();
+
+  AppWidget({super.key}) {
+    GlobalContext.instance.navigatorKey = _navigatorKey;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +25,7 @@ class AppWidget extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Delivery App',
         theme: AppTheme.theme,
+        navigatorKey: _navigatorKey,
         routes: {
           '/': (context) => const SplashPage(),
           '/home': (context) => HomeRouter.page,
