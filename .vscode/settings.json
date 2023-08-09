@@ -1,15 +1,8 @@
 {
-  "dart.flutterSdkPath": ".fvm/flutter_sdk",
-  // Remove .fvm files from search
-  "search.exclude": {
-    "**/.fvm": true
-  },
-  // Remove from file watching
-  "files.watcherExclude": {
-    "**/.fvm": true
-  },
   "bloc.newBlocTemplate.type": "equatable",
   "bloc.newCubitTemplate.type": "equatable",
   "bloc.newCubitTemplate.createDirectory": false,
-  "bloc.newBlocTemplate.createDirectory": false
+  "bloc.newBlocTemplate.createDirectory": false,
+  "dart.flutterSdkPath": "C:\\Users\\Ricardo\\.puro\\envs\\version_3_10_6\\flutter",
+  "dart.sdkPath": "C:\\Users\\Ricardo\\.puro\\envs\\version_3_10_6\\flutter\\bin\\cache\\dart-sdk"
 }
